@@ -1,5 +1,3 @@
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,7 +21,7 @@ public class Main {
 		Arrays.sort(arr);
 		
 		//최빈값
-		int[] plus = new int[4002];
+		int[] plus = new int[4001];
 		int[] minus = new int[4001];
 		
 		for(int i=0; i<N; i++) {
