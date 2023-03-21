@@ -24,6 +24,7 @@ public class Main {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
+			// 양방향
 			arr[a][b] = 1;
 			arr[b][a] = 1;
 		}
@@ -38,6 +39,7 @@ public class Main {
 
 	private static void DFS(int v) {
 		// TODO Auto-generated method stub
+		// 시작지점 방문한 곳이기 때문에 true로 시작
 		visited[v] = true;
 		System.out.print(v + " ");
 		
