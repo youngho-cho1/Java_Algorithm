@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class Main {
 
-	static final int INF = 987654321;
+	// 가중치 최댓값 100,000 * 정점의 개수 100 -1 = 9900001;
+	static final int INF = 9900001;
 	static int	arr[][];
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
