@@ -1,64 +1,72 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Vector;
-
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws Exception{
+	static int N;
+	static String candidate[];
+	static int vote[];
+	static Queue<Integer>[] q;
+    public static void main(String[] args) throws IOException {
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    	StringTokenizer st;
+    	String input;
+    	N = Integer.parseInt(br.readLine());
+    	int idx = 1;
+    	vote = new int[N+1];
+    	q = new LinkedList[1002];
+    	candidate = new String[N+1];
+    	
+    	for(int i=1; i<=N; i++) {
+    		candidate[i] = br.readLine();
+    	}
+    	
+    	while((input = br.readLine()) != null && !input.isEmpty()) { 	 
+    	  st = new StringTokenizer(input," ");
+    	  q[idx] = new LinkedList<>();
+    	  for(int i=1; i<=N; i++) {
+    		  q[idx].offer(Integer.parseInt(st.nextToken()));
+    	  }
+    	  idx ++;
+    	}
+    	
+    	while(true) {
+    		int max = Integer.MIN_VALUE;
+    		int min = Integer.MAX_VALUE;
+    		
+    		for(int i=1; i<idx; i++) {
+    			while(vote[q[i].peek()] == -1) {
+    				q[i].remove();
+    			}
+    			vote[q[i].peek()]++;
+    		}
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        String[] name = new String[n];
-
-        for(int i=0; i<n; i++){
-            name[i] = br.readLine();
-        }
-        String input = "";
-        Queue<Integer>[] score = new LinkedList[1001];
-        int count = 0;
-        int[] v = new int[1001];
-        while((input = br.readLine()) != null && input.length() != 0){
-            String[] arr = input.split(" ");
-            score[count] = new LinkedList<>();
-            for(int i=0; i<n; i++){
-                score[count].add(Integer.parseInt(arr[i])-1);
-            }
-            count ++;
-        }
-        while(true){
-            for(int i=0; i<count; i++){
-                while(v[score[i].peek()] == -1){
-                    score[i].poll();
-                }
-                v[score[i].peek()] ++;
-            }
-            int maxi = Integer.MIN_VALUE;
-    		int mini = Integer.MAX_VALUE;
-            for(int i=0; i<n; i++){
-                maxi = Math.max(maxi,v[i]);
-                if(v[i] != -1){
-                    mini = Math.min(mini,v[i]);
-                }
-            }
-
-            if(maxi*2 > count || maxi == mini){
-                for(int i=0; i<n; i++){
-                    if(v[i] == maxi){
-                        System.out.println(name[i]);
-                    }
-                }
-                return;
-            }
-            for(int i=0; i<n; i++){
-                if(v[i] == mini){
-                    v[i] = -1;
-                }
-                else if(v[i] != -1){
-                    v[i] = 0;
-                }
-            }
-        }
+    		for(int i=1; i<=N; i++) {
+    			max = Math.max(max, vote[i]);
+    			if(vote[i] != -1) {
+    				min = Math.min(min, vote[i]);
+    			}
+    		}
+    		if(max*2 > idx-1 || max == min) {
+    			for(int i=1; i<=N; i++) {
+    				if(vote[i] == max) {
+    					System.out.println(candidate[i]);
+    				}
+    			}
+    			return;
+    		}
+    		for(int i=1; i<=N; i++) {
+    			if(vote[i] == min) {
+    				vote[i] = -1;
+    			}else if(vote[i] != -1) {
+    				vote[i] = 0;
+    			}
+    		}
+    	}
+    	
+    	
     }
 }
