@@ -34,7 +34,8 @@ public class Main {
                 }
                 v[score[i].peek()] ++;
             }
-            int maxi = 0, mini = 123456789;
+            int maxi = Integer.MIN_VALUE;
+    		int mini = Integer.MAX_VALUE;
             for(int i=0; i<n; i++){
                 maxi = Math.max(maxi,v[i]);
                 if(v[i] != -1){
